@@ -1,5 +1,8 @@
 <!--index.wxml-->
 <view class="container">
-
-
+  <view wx:for="{{myLists}}">
+    <image wx:for="{{item.img}}" src="{{item.path}}"></image>
+    {{item.content}}
+  </view>
+  <van-icon bindtap="toDisplay" class="icon_sty" name="add-o" size="30px" />
 </view>

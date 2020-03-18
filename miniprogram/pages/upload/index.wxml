@@ -2,13 +2,14 @@
 <view class="container">
   <!-- 上传图片 -->
   <view class="uploader">
-    <view class="uploader-text" bindtap="doUpload">
-      <text>上传图片</text>
-    </view>
-    <view class="uploader-container" wx:if="{{imgUrl}}">
-      <image class="uploader-image" src="{{imgUrl}}" mode="aspectFit" bindtap="previewImg"></image>
+    <view class="uploader-container">
+      <image class="uploader-image" wx:for="{{imgArr}}" src="{{item.path}}" mode="aspectFit" bindtap="previewImg"></image>
+      <view class="uploader-text" bindtap="doUpload">
+        <view class="tunnel-text-after"></view>
+        <view class="tunnel-text-before"></view>
+      </view>
     </view>
   </view>
-
-
+  <textarea class="text_sty" bindinput="onBlur" placeholder="这一刻的想法..." />
+  <button class="btn_sty" bindtap="dbSave">发表</button>
 </view>

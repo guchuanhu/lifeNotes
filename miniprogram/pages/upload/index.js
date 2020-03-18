@@ -4,12 +4,15 @@ const app = getApp()
 Page({
   data: {
     userInfo: {},
+    imgArr: [],
+    textValue: null
   },
 
   onLoad: function() {
   },
   // 上传图片
   doUpload: function () {
+    let that = this;
     // 选择图片
     wx.chooseImage({
       count: 1,
@@ -25,19 +28,18 @@ Page({
         
         // 上传图片s
         const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        console.log(filePath, cloudPath)
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
           success: res => {
             console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
+            that.data.imgArr.push({
+              id: res.fileID,
+              path: filePath
             })
+            that.setData({ imgArr: that.data.imgArr })
+            console.log(that.data.imgArr)
           },
           fail: e => {
             console.error('[上传文件] 失败：', e)
@@ -57,5 +59,40 @@ Page({
       }
     })
   },
+  dbSave(){
+    if (!this.data.textValue){
+      wx.showToast({
+        icon: 'none',
+        title: '内容不能为空',
+      })
+      return
+    }
+    wx.hideToast();
+    wx.showLoading({
+      title: '发表中',
+    })
+    const db = wx.cloud.database()
+    db.collection('notes').add({
+      // data 字段表示需新增的 JSON 数据
+      data: {
+        title: "my title",
+        content: this.data.textValue,
+        img: this.data.imgArr,
+        createTime: new Date(),
+        reviseTime: null
+      }
+    }).then(res => {
+      console.log(res)
+      wx.navigateBack({
+        delta: 1
+      })
+      wx.hideLoading();
+    })
+  },
+  onBlur(e){
+    const { value } = e.detail;
+    console.log(value)
+    this.setData({textValue: value})
+  }
 
 })

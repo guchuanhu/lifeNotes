@@ -12,7 +12,6 @@ page {
   height: 140rpx;
   width: 100%;
   background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   border-left: none;
   border-right: none;
   display: flex;
@@ -63,28 +62,46 @@ page {
 
 .uploader, .tunnel {
   height: auto;
-  padding: 0 0 0 40rpx;
+  padding: 0 20rpx;
   flex-direction: column;
   align-items: flex-start;
   box-sizing: border-box;
 }
 
 .uploader-text, .tunnel-text {
-  width: 100%;
-  line-height: 52px;
-  font-size: 34rpx;
-  color: #007aff;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  position: relative;
+  top: 50px;
+}
+.tunnel-text-after{
+  display: inline-block;
+  width: 60px;
+  height: 4px;
+  border-radius: 4px;
+  background-color: #ccc;
+  position: absolute;
+  top: 28px;
+}
+.tunnel-text-before{
+  display: inline-block;
+  width: 4px;
+  height: 60px;
+  border-radius: 4px;
+  background-color: #ccc;
+  position: absolute;
+  left: 28px;
 }
 
 .uploader-container {
   width: 100%;
   height: 400rpx;
-  padding: 20rpx 20rpx 20rpx 0;
+  padding: 0;
   display: flex;
   align-content: center;
   justify-content: center;
   box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .uploader-image {
@@ -104,7 +121,6 @@ page {
   align-content: center;
   justify-content: space-between;
   box-sizing: border-box;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .tunnel-text:first-child {
@@ -150,4 +166,16 @@ page {
   font-size: 24rpx;
   line-height: 36rpx;
   word-break: break-all;
+}
+.text_sty{
+  background-color: white;
+  width: 100%;
+}
+.btn_sty{
+  position: fixed;
+  bottom: 0;
+  background-color: white;
+  color: #232323;
+  width: 100%!important;
+  font-weight: normal;
 }
