@@ -1,8 +1,24 @@
 <!--index.wxml-->
-<view class="container">
+<!-- <view class="container">
   <view wx:for="{{myLists}}">
     <image wx:for="{{item.img}}" src="{{item.path}}"></image>
     {{item.content}}
   </view>
   <van-icon bindtap="toDisplay" class="icon_sty" name="add-o" size="30px" />
-</view>
+</view> -->
+<swiper vertical="true" bindchange="onchange" class="home-warp" circular="true" duration='300' next-margin="40rpx" previous-margin="40rpx">
+  <block wx:for="{{myLists}}" wx:key="{{item.id}}"> 
+    <swiper-item class="home-item">
+        <navigator class="article-warp"  url='../details/index?id={{item._id}}'>
+            <image class="main-img" mode='aspectFill' src='{{item.img[0].path}}' ></image>
+            <view class="article-info">
+                <view class="title-warp">
+                    <text class="classify"></text>
+                    <text class="title">{{item.title}}</text>
+                    <text class="description">{{item.content}}</text>
+                </view>
+            </view>
+        </navigator>
+    </swiper-item>
+  </block>   
+</swiper>

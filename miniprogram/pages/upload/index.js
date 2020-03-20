@@ -5,7 +5,8 @@ Page({
   data: {
     userInfo: {},
     imgArr: [],
-    textValue: null
+    textValue: null,
+    title: null
   },
 
   onLoad: function() {
@@ -75,7 +76,7 @@ Page({
     db.collection('notes').add({
       // data 字段表示需新增的 JSON 数据
       data: {
-        title: "my title",
+        title: this.data.title,
         content: this.data.textValue,
         img: this.data.imgArr,
         createTime: new Date(),
@@ -83,16 +84,19 @@ Page({
       }
     }).then(res => {
       console.log(res)
-      wx.navigateBack({
-        delta: 1
+      wx.switchTab({
+        url: '../display/index'
       })
       wx.hideLoading();
     })
   },
   onBlur(e){
     const { value } = e.detail;
-    console.log(value)
-    this.setData({textValue: value})
+    console.log(value, e)
+    const { name } = e.target.dataset;
+    this.setData({
+      [name]: value
+    })
   }
 
 })

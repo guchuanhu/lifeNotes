@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view>
+  <image wx:for="{{details.img}}" src="{{item.path}}"></image>
+</view>
+<view>{{details.title}}</view>
+<view>{{details.content}}</view>

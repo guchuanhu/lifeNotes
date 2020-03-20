@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <input bindinput="onChange" placeholder="昵称" />
+  <button bindtap="submit">注册</button>
+</view>

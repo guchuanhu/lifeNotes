@@ -170,12 +170,19 @@ page {
 .text_sty{
   background-color: white;
   width: 100%;
+  margin-top: 5px;
+  padding: 10px;
 }
 .btn_sty{
-  position: fixed;
-  bottom: 0;
   background-color: white;
-  color: #232323;
-  width: 100%!important;
+  color: #666;
   font-weight: normal;
+  margin-top: 20px
+}
+.input_sty{
+  width: 100%;
+  line-height: 25px;
+  background-color: white;
+  margin-top: 5px;
+  padding: 10px;
 }

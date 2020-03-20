@@ -10,6 +10,7 @@
       </view>
     </view>
   </view>
-  <textarea class="text_sty" bindinput="onBlur" placeholder="这一刻的想法..." />
+  <textarea data-name="textValue" class="text_sty" bindinput="onBlur" placeholder="这一刻的想法..." />
+  <input class="input_sty" data-name="title" bindinput="onBlur" placeholder="来个简略的标题" />
   <button class="btn_sty" bindtap="dbSave">发表</button>
 </view>
