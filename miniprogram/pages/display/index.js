@@ -23,13 +23,22 @@ Page({
       this.data.count = Math.floor(total/10)
     }
     this.data.total = total;
-    db.skip(this.data.count*10).limit(10).get({
-      success: function (res) {
-        console.log(res.data);
-        that.data.count = that.data.count - 1;
-        that.setData({ myLists: that.data.myLists.concat(res.data.reverse()) });
-      }
+    let result = await db.skip(this.data.count * 10).limit(10).get();
+    let arryList = Array.prototype.concat.apply([],result.data.map(v=>v.img.map(val=>val.id)));
+    
+    let arryListRes = await wx.cloud.getTempFileURL({ fileList: arryList });
+    let arryListResDict = {};
+    arryListRes.fileList.forEach(v=>{
+      arryListResDict[v.fileID] = v.tempFileURL
     })
+    result.data.forEach(v=>{
+      v.img.forEach(val=>{
+        val.path = arryListResDict[val.id];
+      })
+    })
+    console.log(result, arryList, arryListRes)
+    this.data.count = this.data.count - 1;
+    this.setData({ myLists: this.data.myLists.concat(result.data.reverse()) });
   },
   onchange(event){
     const { current, source } =  event.detail;
